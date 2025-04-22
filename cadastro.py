@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import messagebox
 from tkcalendar import DateEntry
 from database import inserir_tarefa
+from datetime import datetime
+
 
 def abrir_tela_cadastro(root):
     cadastro = tk.Toplevel(root)
@@ -34,7 +36,7 @@ def abrir_tela_cadastro(root):
         try:
             horas = int(horas_entry.get())
             titulo = titulo_entry.get()
-            data = data_entry.get()
+            data = datetime.strptime(data_entry.get(), "%m/%d/%y").strftime("%Y%m%d")
             descricao = desc_entry.get("1.0", "end-1c")
             inserir_tarefa(data, titulo, descricao, horas)
             messagebox.showinfo("Sucesso", "Tarefa cadastrada!")

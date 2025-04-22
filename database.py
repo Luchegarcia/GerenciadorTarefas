@@ -1,5 +1,7 @@
 import sqlite3
 
+from datetime import datetime
+
 def conectar():
     conn = sqlite3.connect("tarefas.db")
     criar_tabela(conn)
@@ -27,7 +29,7 @@ def buscar_tarefas(data_ini, data_fim):
         return conn.execute("""
             SELECT id, data, titulo, descricao, horas
             FROM tarefas
-            WHERE date(data) BETWEEN date(?) AND date(?)
+            WHERE data BETWEEN ? AND ?
         """, (data_ini, data_fim)).fetchall()
 
 def excluir_tarefa(id):
