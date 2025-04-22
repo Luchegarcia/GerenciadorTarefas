@@ -33,10 +33,13 @@ def abrir_tela_cadastro(root):
     def salvar():
         try:
             horas = int(horas_entry.get())
-            inserir_tarefa(data_entry.get(), titulo_entry.get(), desc_entry.get(), horas)
+            titulo = titulo_entry.get()
+            data = data_entry.get()
+            descricao = desc_entry.get("1.0", "end-1c")
+            inserir_tarefa(data, titulo, descricao, horas)
             messagebox.showinfo("Sucesso", "Tarefa cadastrada!")
             cadastro.destroy()
         except ValueError:
             messagebox.showerror("Erro", "Horas deve ser um número inteiro")
 
-    tk.Button(cadastro, text="Salvar", command=salvar).grid(row=10, columnspan=2, pady=10)
+    tk.Button(cadastro, text="Salvar", command=salvar, width=20).grid(row=10, columnspan=2, pady=10)
