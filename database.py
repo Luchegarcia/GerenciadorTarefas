@@ -1,10 +1,12 @@
 import sqlite3
 
 def conectar():
-    return sqlite3.connect("tarefas.db")
+    conn = sqlite3.connect("tarefas.db")
+    criar_tabela(conn)
+    return conn
 
-def criar_tabela():
-    with conectar() as conn:
+def criar_tabela(conn):
+    with conn:
         conn.execute("""
             CREATE TABLE IF NOT EXISTS tarefas (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
