@@ -34,4 +34,16 @@ def buscar_tarefas(data_ini, data_fim):
 
 def excluir_tarefa(id):
     with conectar() as conn:
-        conn.execute("DELETE FROM tarefas WHERE id = ?", (id,))
+        conn.execute("DELETE FROM tarefas WHERE id = ?", (id))
+
+def buscar_tarefas_por_id(tarefa_id):
+    with conectar() as conn:
+        return conn.execute("SELECT * FROM tarefas WHERE id = ?", (tarefa_id)).fetchone()
+
+def atualizar_tarefa(tarefa_id, data, titulo, descricao, horas):
+    with conectar() as conn:
+        conn.execute("""
+            UPDATE tarefas
+            SET data = ?, titulo = ?, descricao = ?, horas = ?
+            WHERE id = ?
+        """, (data, titulo, descricao, horas, tarefa_id))
